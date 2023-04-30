@@ -3,20 +3,21 @@ const dotenv = require('dotenv').config()
 const mongoose = require('mongoose').default
 const PORT = process.env.PORT
 const Session = require('express-session')
-const socketIO = require('socket.io')
 const http = require('http')
 const MONGO_URI = process.env.MONGO_URI
 const apiRouter = require('./router/apiRouter/apiRouter')
 const middleware = require('./middleware/authMiddleware')
+const setupSocket = require('./sockets');
 
 
 
 
 
 const app = express()
-const server = http.Server(app)
-const io = socketIO(server)
+const server = http.createServer(app)
 
+
+setupSocket(server)
 
 
 app.use(express.json())
