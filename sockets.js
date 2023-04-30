@@ -2,10 +2,8 @@ const socketIO = require('socket.io')
 const {v4 : uuidv4} = require('uuid')
 const attemptController = require('./controller/attemptController')
 
-function setupSockets(server) {
+module.exports  = function setupSockets(server) {
     const io = socketIO(server)
-
-
     io.on('connection', (socket) => {
         console.log('a user connected');
 
@@ -26,12 +24,7 @@ function setupSockets(server) {
                 console.log('user disconnected');
             })
     }
-
-
     )
-
-
 }
 
 
-module.exports = setupSockets()
